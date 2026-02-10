@@ -26,6 +26,7 @@ A TypeScript-based Express.js backend server for a Learning Management System (L
 ## ✨ Features
 
 ### Authentication & User Management
+
 - User registration with email verification
 - Login with JWT token-based authentication
 - Password reset and recovery functionality
@@ -34,11 +35,13 @@ A TypeScript-based Express.js backend server for a Learning Management System (L
 - Activity logging for audit trails
 
 ### Institution Management
+
 - Create and manage institutions
 - Role-based access control (Admin, Instructor, Student)
 - User activity tracking and status management
 
 ### Course & Class Management
+
 - CRUD operations for courses (Create, Read, Update, Delete)
 - Soft delete and permanent delete functionality
 - Class management and scheduling
@@ -46,15 +49,18 @@ A TypeScript-based Express.js backend server for a Learning Management System (L
 - Update and delete class enrollments
 
 ### File Upload Management
+
 - Multi-file upload support with Cloudinary integration
 - File deletion and management
 - Secure file storage and retrieval
 
 ### Live Classes
+
 - Live class creation and management
 - Scheduling and participant management
 
 ### Rate Limiting
+
 - API rate limiting to prevent abuse
 - Configurable request thresholds
 
@@ -62,19 +68,19 @@ A TypeScript-based Express.js backend server for a Learning Management System (L
 
 ## 🛠 Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| **Runtime** | Node.js (v18+) |
-| **Language** | TypeScript 5.9+ |
-| **Framework** | Express.js 5.2+ |
-| **Database** | MongoDB with Mongoose ODM |
-| **Authentication** | JWT (JSON Web Tokens) |
-| **File Storage** | Cloudinary |
-| **Validation** | Zod schema validation |
-| **Email** | Nodemailer |
-| **Security** | Bcrypt, Helmet, CORS |
-| **Rate Limiting** | express-rate-limit |
-| **Development** | Nodemon, TypeScript Compiler |
+| Layer              | Technology                   |
+| ------------------ | ---------------------------- |
+| **Runtime**        | Node.js (v18+)               |
+| **Language**       | TypeScript 5.9+              |
+| **Framework**      | Express.js 5.2+              |
+| **Database**       | MongoDB with Mongoose ODM    |
+| **Authentication** | JWT (JSON Web Tokens)        |
+| **File Storage**   | Cloudinary                   |
+| **Validation**     | Zod schema validation        |
+| **Email**          | Nodemailer                   |
+| **Security**       | Bcrypt, Helmet, CORS         |
+| **Rate Limiting**  | express-rate-limit           |
+| **Development**    | Nodemon, TypeScript Compiler |
 
 ---
 
@@ -248,7 +254,7 @@ PORT=8000
 NODE_ENV=development
 
 # Database Connection
-MONGO_URL=mongodb+srv://username:password@cluster.mongodb.net/lms?retryWrites=true&w=majority
+MONGO_URL=your_mongodb_connection_string_here
 
 # Authentication & Security
 TOKEN_SECRET=your_jwt_secret_key_here_min_32_chars
@@ -272,16 +278,16 @@ GEN_AI_API=your_google_ai_api_key
 
 ### Variable Explanations
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `PORT` | Server port number | `8000` |
-| `MONGO_URL` | MongoDB connection string with credentials | `mongodb+srv://...` |
-| `TOKEN_SECRET` | Secret key for signing JWT tokens (keep secure!) | Min 32 characters |
-| `CLIENT_URL` | Frontend URL for email links and CORS | `http://localhost:3000` |
-| `SENDER_EMAIL` | Email address for sending verification/reset emails | `noreply@yourapp.com` |
-| `SENDER_PASS` | Email password or app-specific password | (from email provider) |
-| `CLOUDINARY_*` | Cloudinary credentials for file storage | Available from Cloudinary dashboard |
-| `GEN_AI_API` | Google Generative AI API key (optional) | (for AI features) |
+| Variable       | Description                                         | Example                             |
+| -------------- | --------------------------------------------------- | ----------------------------------- |
+| `PORT`         | Server port number                                  | `8000`                              |
+| `MONGO_URL`    | MongoDB connection string with credentials          | `mongodb_url `                      |
+| `TOKEN_SECRET` | Secret key for signing JWT tokens (keep secure!)    | Min 32 characters                   |
+| `CLIENT_URL`   | Frontend URL for email links and CORS               | `http://localhost:3000`             |
+| `SENDER_EMAIL` | Email address for sending verification/reset emails | `noreply@yourapp.com`               |
+| `SENDER_PASS`  | Email password or app-specific password             | (from email provider)               |
+| `CLOUDINARY_*` | Cloudinary credentials for file storage             | Available from Cloudinary dashboard |
+| `GEN_AI_API`   | Google Generative AI API key (optional)             | (for AI features)                   |
 
 #### 🔐 Security Notes
 
@@ -306,6 +312,7 @@ npm run dev
 The server will start on `http://localhost:8000` (or your configured PORT).
 
 Expected output:
+
 ```
 Server is running on port 8000
 MongoDB Connected
@@ -328,80 +335,80 @@ All endpoints return JSON responses with consistent status codes and error messa
 
 ### Authentication Routes (`/api/auth`)
 
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|----------------|
-| POST | `/register` | Register new user | ❌ No |
-| POST | `/login` | User login | ❌ No |
-| POST | `/logout` | User logout | ✅ Yes |
-| POST | `/verify-account` | Verify email address | ❌ No |
-| POST | `/forget-password` | Request password reset | ❌ No |
-| POST | `/reset-password` | Reset password with token | ❌ No |
-| POST | `/change-password` | Change password (logged in) | ✅ Yes |
-| GET | `/session` | Get current session | ✅ Yes |
-| PUT | `/update-profile` | Update user details | ✅ Yes |
+| Method | Endpoint           | Description                 | Auth Required |
+| ------ | ------------------ | --------------------------- | ------------- |
+| POST   | `/register`        | Register new user           | ❌ No         |
+| POST   | `/login`           | User login                  | ❌ No         |
+| POST   | `/logout`          | User logout                 | ✅ Yes        |
+| POST   | `/verify-account`  | Verify email address        | ❌ No         |
+| POST   | `/forget-password` | Request password reset      | ❌ No         |
+| POST   | `/reset-password`  | Reset password with token   | ❌ No         |
+| POST   | `/change-password` | Change password (logged in) | ✅ Yes        |
+| GET    | `/session`         | Get current session         | ✅ Yes        |
+| PUT    | `/update-profile`  | Update user details         | ✅ Yes        |
 
 ### User Management Routes (`/api/admin` or `/api/users`)
 
-| Method | Endpoint | Description | Auth Required | Role |
-|--------|----------|-------------|----------------|------|
-| POST | `/users` | Create new user | ✅ Yes | Admin |
-| GET | `/users` | Get all users | ✅ Yes | Admin |
-| GET | `/users/:id` | Get user by ID | ✅ Yes | Admin |
-| PUT | `/users/:id` | Update user | ✅ Yes | Admin |
-| DELETE | `/users/:id` | Delete user | ✅ Yes | Admin |
-| PUT | `/users/:id/status` | Toggle active status | ✅ Yes | Admin |
-| GET | `/activity-logs/:userId` | Get user activity logs | ✅ Yes | Admin |
+| Method | Endpoint                 | Description            | Auth Required | Role  |
+| ------ | ------------------------ | ---------------------- | ------------- | ----- |
+| POST   | `/users`                 | Create new user        | ✅ Yes        | Admin |
+| GET    | `/users`                 | Get all users          | ✅ Yes        | Admin |
+| GET    | `/users/:id`             | Get user by ID         | ✅ Yes        | Admin |
+| PUT    | `/users/:id`             | Update user            | ✅ Yes        | Admin |
+| DELETE | `/users/:id`             | Delete user            | ✅ Yes        | Admin |
+| PUT    | `/users/:id/status`      | Toggle active status   | ✅ Yes        | Admin |
+| GET    | `/activity-logs/:userId` | Get user activity logs | ✅ Yes        | Admin |
 
 ### Institution Routes (`/api/institutions`)
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| PUT | `/:id` | Update institution | ✅ Yes |
+| Method | Endpoint | Description        | Auth   |
+| ------ | -------- | ------------------ | ------ |
+| PUT    | `/:id`   | Update institution | ✅ Yes |
 
 ### Course Routes (`/api/courses`)
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/` | Create course | ✅ Yes |
-| GET | `/` | Get all courses | ✅ Yes |
-| GET | `/:id` | Get course by ID | ✅ Yes |
-| PUT | `/:id` | Update course | ✅ Yes |
-| PATCH | `/:id/soft-delete` | Soft delete course | ✅ Yes |
+| Method | Endpoint                | Description        | Auth   |
+| ------ | ----------------------- | ------------------ | ------ |
+| POST   | `/`                     | Create course      | ✅ Yes |
+| GET    | `/`                     | Get all courses    | ✅ Yes |
+| GET    | `/:id`                  | Get course by ID   | ✅ Yes |
+| PUT    | `/:id`                  | Update course      | ✅ Yes |
+| PATCH  | `/:id/soft-delete`      | Soft delete course | ✅ Yes |
 | DELETE | `/:id/permanent-delete` | Permanently delete | ✅ Yes |
 
 ### Class Routes (`/api/classes`)
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/` | Create class | ✅ Yes |
-| GET | `/` | Get all classes | ✅ Yes |
-| GET | `/:id` | Get class by ID | ✅ Yes |
-| PUT | `/:id` | Update class | ✅ Yes |
-| DELETE | `/:id` | Delete class | ✅ Yes |
+| Method | Endpoint | Description     | Auth   |
+| ------ | -------- | --------------- | ------ |
+| POST   | `/`      | Create class    | ✅ Yes |
+| GET    | `/`      | Get all classes | ✅ Yes |
+| GET    | `/:id`   | Get class by ID | ✅ Yes |
+| PUT    | `/:id`   | Update class    | ✅ Yes |
+| DELETE | `/:id`   | Delete class    | ✅ Yes |
 
 ### Class Enrollment Routes (`/api/enrollments`)
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/` | Enroll student | ✅ Yes |
-| GET | `/` | Get all enrollments | ✅ Yes |
-| GET | `/:id` | Get enrollment by ID | ✅ Yes |
-| PUT | `/:id` | Update enrollment | ✅ Yes |
-| DELETE | `/:id` | Delete enrollment | ✅ Yes |
+| Method | Endpoint | Description          | Auth   |
+| ------ | -------- | -------------------- | ------ |
+| POST   | `/`      | Enroll student       | ✅ Yes |
+| GET    | `/`      | Get all enrollments  | ✅ Yes |
+| GET    | `/:id`   | Get enrollment by ID | ✅ Yes |
+| PUT    | `/:id`   | Update enrollment    | ✅ Yes |
+| DELETE | `/:id`   | Delete enrollment    | ✅ Yes |
 
 ### Upload Routes (`/api/uploads`)
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/` | Upload file(s) | ✅ Yes |
-| DELETE | `/:id` | Delete file | ✅ Yes |
+| Method | Endpoint | Description    | Auth   |
+| ------ | -------- | -------------- | ------ |
+| POST   | `/`      | Upload file(s) | ✅ Yes |
+| DELETE | `/:id`   | Delete file    | ✅ Yes |
 
 ### Live Class Routes (`/api/live`)
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/` | Create live class | ✅ Yes |
-| GET | `/` | Get live classes | ✅ Yes |
+| Method | Endpoint | Description       | Auth   |
+| ------ | -------- | ----------------- | ------ |
+| POST   | `/`      | Create live class | ✅ Yes |
+| GET    | `/`      | Get live classes  | ✅ Yes |
 
 ---
 
@@ -418,6 +425,7 @@ All endpoints return JSON responses with consistent status codes and error messa
 ### JWT Token Structure
 
 Tokens contain:
+
 - `userId`: User's unique identifier
 - `email`: User's email address
 - `role`: User's role (Admin, Instructor, Student)
@@ -441,26 +449,31 @@ Tokens contain:
 ## 🔧 Middleware
 
 ### verifyToken.ts
+
 Validates JWT tokens from the `Authorization` header and attaches user info to the request.
 
 **Usage**: Applied to protected routes
 
 ### verifyRoles.ts
+
 Checks if the authenticated user has the required role for an endpoint.
 
 **Usage**: `verifyRoles(['Admin', 'Instructor'])`
 
 ### activityLogger.ts
+
 Logs all user actions (login, create, update, delete) with timestamps and metadata.
 
 **Logged Data**: User ID, action type, resource, timestamp, IP address
 
 ### sendVerification.ts
+
 Sends verification emails with tokens for account confirmation and password resets.
 
 **Uses**: Nodemailer with SMTP configuration from .env
 
 ### rateLimit.ts
+
 Implements rate limiting to prevent API abuse and DDoS attacks.
 
 **Default**: 100 requests per 15 minutes per IP
@@ -470,9 +483,11 @@ Implements rate limiting to prevent API abuse and DDoS attacks.
 ## 📊 Controllers & Models
 
 ### Controllers
+
 Controllers handle incoming HTTP requests, validate data using Zod schemas, interact with models, and return responses.
 
 **Example Flow**:
+
 ```
 Request → Controller → Zod Validation → Model Queries → Response
 ```
@@ -480,21 +495,23 @@ Request → Controller → Zod Validation → Model Queries → Response
 ### Models (Mongoose Schemas)
 
 #### User Model
+
 ```typescript
 {
-  email: string (unique)
-  password: string (hashed)
-  firstName: string
-  lastName: string
-  role: 'Admin' | 'Instructor' | 'Student'
-  isActive: boolean
-  isVerified: boolean
-  createdAt: Date
-  updatedAt: Date
+  email: string(unique);
+  password: string(hashed);
+  firstName: string;
+  lastName: string;
+  role: "Admin" | "Instructor" | "Student";
+  isActive: boolean;
+  isVerified: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
 #### Course Model
+
 ```typescript
 {
   title: string
@@ -510,27 +527,29 @@ Request → Controller → Zod Validation → Model Queries → Response
 ```
 
 #### Class Model
+
 ```typescript
 {
-  title: string
-  course: ObjectId (reference)
-  room: string
-  schedule: string
-  maxStudents: number
-  createdAt: Date
-  updatedAt: Date
+  title: string;
+  course: ObjectId(reference);
+  room: string;
+  schedule: string;
+  maxStudents: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
 #### Activity Log Model
+
 ```typescript
 {
-  user: ObjectId (reference)
-  action: string ('create', 'update', 'delete', 'login')
-  resource: string ('User', 'Course', 'Class')
-  resourceId: ObjectId
-  changes: object
-  timestamp: Date
+  user: ObjectId(reference);
+  action: string("create", "update", "delete", "login");
+  resource: string("User", "Course", "Class");
+  resourceId: ObjectId;
+  changes: object;
+  timestamp: Date;
 }
 ```
 
@@ -539,18 +558,22 @@ Request → Controller → Zod Validation → Model Queries → Response
 ## 🛎️ Services
 
 ### dbConnect.ts
+
 Utility function to connect to MongoDB.
 
 **Usage**:
+
 ```typescript
-import { connectDB } from './services/dbConnect';
+import { connectDB } from "./services/dbConnect";
 await connectDB();
 ```
 
 ### upload.ts
+
 Configures Cloudinary storage for file uploads using Multer.
 
 **Handles**:
+
 - Image uploads (PNG, JPG, JPEG)
 - Document uploads (PDF)
 - Video uploads (MP4, WebM)
@@ -564,11 +587,13 @@ Configures Cloudinary storage for file uploads using Multer.
 All API payloads are validated using **Zod** schemas located in the root `zod/` directory.
 
 ### Validation Flow
+
 ```
 Request Body → Zod Schema → Validation Result → Pass/Fail → Response
 ```
 
 ### Schema Files
+
 - `userSchema.ts` — User registration/update validation
 - `courseSchema.ts` — Course creation/update validation
 - `classSchema.ts` — Class management validation
@@ -578,6 +603,7 @@ Request Body → Zod Schema → Validation Result → Pass/Fail → Response
 - `classEnrollmentSchema.ts` — Enrollment validation
 
 ### Example Error Response (Validation Failure)
+
 ```json
 {
   "success": false,
@@ -596,16 +622,16 @@ The API returns consistent error responses with appropriate HTTP status codes.
 
 ### Common Status Codes
 
-| Code | Meaning | Use Case |
-|------|---------|----------|
-| 200 | OK | Successful request |
-| 201 | Created | Resource created successfully |
-| 400 | Bad Request | Invalid input/validation error |
-| 401 | Unauthorized | Missing/invalid authentication |
-| 403 | Forbidden | Insufficient permissions |
-| 404 | Not Found | Resource doesn't exist |
-| 409 | Conflict | Duplicate resource (e.g., email exists) |
-| 500 | Server Error | Unexpected server error |
+| Code | Meaning      | Use Case                                |
+| ---- | ------------ | --------------------------------------- |
+| 200  | OK           | Successful request                      |
+| 201  | Created      | Resource created successfully           |
+| 400  | Bad Request  | Invalid input/validation error          |
+| 401  | Unauthorized | Missing/invalid authentication          |
+| 403  | Forbidden    | Insufficient permissions                |
+| 404  | Not Found    | Resource doesn't exist                  |
+| 409  | Conflict     | Duplicate resource (e.g., email exists) |
+| 500  | Server Error | Unexpected server error                 |
 
 ### Error Response Format
 
@@ -632,13 +658,13 @@ The API returns consistent error responses with appropriate HTTP status codes.
 
 ### File Naming Conventions
 
-| Type | Convention | Example |
-|------|-----------|---------|
+| Type        | Convention                  | Example              |
+| ----------- | --------------------------- | -------------------- |
 | Controllers | `functionNameController.ts` | `loginController.ts` |
-| Models | `modelNameModel.ts` | `userModel.ts` |
-| Routes | `featureRoutes.ts` | `authRoutes.ts` |
-| Middleware | `purposeMiddleware.ts` | `verifyToken.ts` |
-| Services | `serviceName.ts` | `upload.ts` |
+| Models      | `modelNameModel.ts`         | `userModel.ts`       |
+| Routes      | `featureRoutes.ts`          | `authRoutes.ts`      |
+| Middleware  | `purposeMiddleware.ts`      | `verifyToken.ts`     |
+| Services    | `serviceName.ts`            | `upload.ts`          |
 
 ### Adding New Features
 
@@ -653,6 +679,7 @@ The API returns consistent error responses with appropriate HTTP status codes.
 ### TypeScript Compilation
 
 Check for type errors:
+
 ```bash
 npm run build
 ```
@@ -666,6 +693,7 @@ npm run build
 **Problem**: `Error: listen EADDRINUSE: address already in use :::8000`
 
 **Solution**:
+
 ```bash
 # Find and kill process using port 8000
 # On Windows:
@@ -682,6 +710,7 @@ kill -9 <PID>
 **Problem**: `MongoServerError: connect ECONNREFUSED`
 
 **Solution**:
+
 1. Verify MongoDB URI in `.env`
 2. Check MongoDB Atlas IP whitelist (add your IP)
 3. Ensure credentials are correct
@@ -692,6 +721,7 @@ kill -9 <PID>
 **Problem**: `Error uploading to Cloudinary`
 
 **Solution**:
+
 1. Verify Cloudinary credentials in `.env`
 2. Check file size limits
 3. Ensure file type is supported
@@ -702,6 +732,7 @@ kill -9 <PID>
 **Problem**: `401: Token expired`
 
 **Solution**:
+
 - Login again to get a new token
 - Refresh token endpoints (if implemented)
 - Check `JWT_EXPIRES_IN` in `.env`
@@ -711,6 +742,7 @@ kill -9 <PID>
 **Problem**: `Error sending email`
 
 **Solution**:
+
 1. Check SENDER_EMAIL and SENDER_PASS in `.env`
 2. For Gmail: Enable 2FA and use App Passwords
 3. Check email provider's SMTP settings
@@ -721,6 +753,7 @@ kill -9 <PID>
 **Problem**: Compile errors after installing packages
 
 **Solution**:
+
 ```bash
 npm run build  # See detailed errors
 npm install    # Reinstall packages
