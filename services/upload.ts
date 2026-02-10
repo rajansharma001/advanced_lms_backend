@@ -1,0 +1,49 @@
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import multer from "multer";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: async (req, file) => {
+    const isImage = file.mimetype.startsWith("image");
+    const isVideo = file.mimetype.startsWith("video");
+    const isPdf = file.mimetype === "application/pdf";
+
+    return {
+      folder: "lms_uploads",
+      resource_type: "auto",
+
+      allowed_formats: [
+        "jpg",
+        "png",
+        "jpeg",
+        "webp",
+        "avif",
+        "mp4",
+        "webm",
+        "pdf",
+        "svg",
+      ],
+      ...(isImage && {
+        transformation: [
+          { width: 1920, crop: "scale" },
+          { quality: "auto" },
+          { fetch_format: "auto" },
+          { effect: "enhance" },
+        ],
+      }),
+    };
+  },
+});
+
+// No 'limits' object here means UNLIMITED file count
+export const upload = multer({ storage });

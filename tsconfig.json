@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "outDir": "dist",
+    "rootDir": "../",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "typeRoots": ["./@types", "./node_modules/@types"]
+  },
+  "include": [
+    "**/*.ts" /* Includes all backend files */,
+    "../zod/**/*.ts" /* Explicitly includes the sibling zod folder */
+  ],
+  "exclude": ["node_modules", "dist"]
+}
