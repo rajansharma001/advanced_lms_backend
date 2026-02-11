@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 export const logoutController = async (req: Request, res: Response) => {
   try {
+    const isProd = process.env.NODE_ENV === "production";
+
     const logout = res.clearCookie("TOKEN", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: isProd, // only secure in production
+      sameSite: isProd ? "none" : "lax",
       maxAge: 60 * 60 * 1000,
     });
 
