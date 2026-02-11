@@ -44,11 +44,13 @@ export const LoginController = async (req: Request, res: Response) => {
     const secret = process.env.TOKEN_SECRET as string;
     const token = jwt.sign({ id: getUser._id }, secret, { expiresIn: "1h" });
 
+    const isProd = process.env.NODE_ENV === "production";
+
     return res
       .cookie("TOKEN", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        secure: isProd, // only secure in production
+        sameSite: isProd ? "none" : "lax",
         maxAge: 60 * 60 * 1000,
       })
       .status(200)
