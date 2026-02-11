@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { CourseZodSchema } from "../../../../zod/courseSchema";
-import mongoose from "mongoose";
 import { CourseModel } from "../../../model/courseModel/course.model";
+import mongoose from "mongoose";
 
 export const getCourseById = async (req: Request, res: Response) => {
   try {

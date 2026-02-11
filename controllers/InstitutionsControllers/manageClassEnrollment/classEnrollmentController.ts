@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UserModel } from "../../../model/userModels/user.model";
 import { ClassModel } from "../../../model/institutionModels/classModel";
 import { ClassEnrollmentModel } from "../../../model/institutionModels/classEnrollmentModel";
-import { ClassEnrollmentSchema } from "../../../../zod/classEnrollmentSchema";
+import { ClassEnrollmentSchema } from "../../../zod/classEnrollmentSchema";
 import { CourseModel } from "../../../model/courseModel/course.model";
 
 export const addClassEnrollment = async (req: Request, res: Response) => {

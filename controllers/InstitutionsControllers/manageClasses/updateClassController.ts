@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ClassModel } from "../../../model/institutionModels/classModel";
-import { classSchema } from "../../../../zod/classSchema";
+import { classSchema } from "../../../zod/classSchema";
 
 export const updateClass = async (req: Request, res: Response) => {
   try {
@@ -26,7 +26,7 @@ export const updateClass = async (req: Request, res: Response) => {
       },
       {
         new: true,
-      }
+      },
     );
 
     if (!updateClass) {

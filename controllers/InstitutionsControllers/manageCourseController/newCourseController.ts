@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { CourseZodSchema } from "../../../../zod/courseSchema";
 import { CourseModel } from "../../../model/courseModel/course.model";
 import mongoose from "mongoose";
+import { CourseZodSchema } from "../../../zod/courseSchema";
 
 export const newCourse = async (req: Request, res: Response) => {
   const session = await mongoose.startSession();
@@ -19,7 +19,7 @@ export const newCourse = async (req: Request, res: Response) => {
     const addCourse = await CourseModel.create({
       ...courseParsed.data,
       instructorIds: courseParsed.data.instructorIds.map(
-        (id) => new mongoose.Types.ObjectId(id)
+        (id) => new mongoose.Types.ObjectId(id),
       ),
     });
     console.log(6);

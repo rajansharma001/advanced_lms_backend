@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserSchema, UserUpdateSchema } from "../../../zod/userSchema";
+import { UserSchema, UserUpdateSchema } from "../../zod/userSchema";
 import { UserModel } from "../../model/userModels/user.model";
 
 export const updateUser = async (req: Request, res: Response) => {

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CourseZodSchema } from "../../../../zod/courseSchema";
+import { CourseZodSchema } from "../../../zod/courseSchema";
 import mongoose from "mongoose";
 import { CourseModel } from "../../../model/courseModel/course.model";
 
@@ -22,7 +22,7 @@ export const softDelete = async (req: Request, res: Response) => {
       {
         courseStatus: "trash",
       },
-      { new: true }
+      { new: true },
     );
 
     if (!softDelete) {
@@ -50,7 +50,7 @@ export const restoreSoftDelete = async (req: Request, res: Response) => {
       {
         courseStatus: "draft",
       },
-      { new: true }
+      { new: true },
     );
     if (!restoreSoftDelete) {
       return res.status(404).json({ error: "Course not found." });

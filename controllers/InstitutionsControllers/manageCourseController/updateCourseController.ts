@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CourseZodSchema } from "../../../../zod/courseSchema";
+import { CourseZodSchema } from "../../../zod/courseSchema";
 import { CourseModel } from "../../../model/courseModel/course.model";
 import mongoose from "mongoose";
 

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { UserModel } from "../../model/userModels/user.model";
-import { UserType } from "../../../zod/userSchema";
+import { UserType } from "../../zod/userSchema";
 
 interface MyPayload extends jwt.JwtPayload {
   _id: string;

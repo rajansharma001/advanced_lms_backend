@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ClassEnrollmentModel } from "../../../model/institutionModels/classEnrollmentModel";
-import { ClassEnrollmentSchema } from "../../../../zod/classEnrollmentSchema";
+import { ClassEnrollmentSchema } from "../../../zod/classEnrollmentSchema";
 import { UserModel } from "../../../model/userModels/user.model";
 import { ClassModel } from "../../../model/institutionModels/classModel";
 import mongoose from "mongoose";

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import { LiveClassModel } from "../../model/liveClassModel/liveClass.model";
-import { LiveClassZodSchema } from "../../../zod/liveClassZodSchema";
+import { LiveClassZodSchema } from "../../zod/liveClassZodSchema";
 import { ClassEnrollmentModel } from "../../model/institutionModels/classEnrollmentModel";
 import mongoose from "mongoose";
 

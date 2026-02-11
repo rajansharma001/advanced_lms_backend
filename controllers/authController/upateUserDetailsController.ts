@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserSchema } from "../../../zod/userSchema";
+import { UserSchema } from "../../zod/userSchema";
 import { UserModel } from "../../model/userModels/user.model";
 
 const ProfileSchema = UserSchema.pick({
@@ -32,7 +32,7 @@ export const updateUser = async (req: Request, res: Response) => {
         ...parsed.data,
         profileImage: imageFile,
       },
-      { new: true }
+      { new: true },
     );
 
     return res

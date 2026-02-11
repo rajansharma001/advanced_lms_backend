@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserSchema } from "../../../zod/userSchema";
+import { UserSchema } from "../../zod/userSchema";
 import { UserModel } from "../../model/userModels/user.model";
 
 const deactivateSchema = UserSchema.pick({ _id: true, isActive: true });
@@ -25,7 +25,7 @@ export const deactivateUser = async (req: Request, res: Response) => {
       parsed.data._id,
       {
         isActive: parsed.data.isActive,
-      }
+      },
     );
     if (!changeActiveStatus) {
       return res

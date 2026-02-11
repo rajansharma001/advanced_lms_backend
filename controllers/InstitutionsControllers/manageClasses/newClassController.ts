@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { classSchema } from "../../../../zod/classSchema";
 import { ClassModel } from "../../../model/institutionModels/classModel";
 import mongoose from "mongoose";
+import { classSchema } from "../../../zod/classSchema";
 
 export const newClass = async (req: Request, res: Response) => {
   try {
@@ -19,7 +19,7 @@ export const newClass = async (req: Request, res: Response) => {
     const addNewClass = await ClassModel.create({
       ...parsed.data,
       instructorIds: parsed.data.instructorIds?.map(
-        (id) => new mongoose.Types.ObjectId(id)
+        (id) => new mongoose.Types.ObjectId(id),
       ),
     });
 

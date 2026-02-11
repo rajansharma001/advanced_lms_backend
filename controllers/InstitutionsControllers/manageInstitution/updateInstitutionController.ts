@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { InstitutionSchema } from "../../../../zod/institutionSchema";
+import { InstitutionSchema } from "../../../zod/institutionSchema";
 import { InstitutionModel } from "../../../model/institutionModels/institutionModel";
 
 export const updateInstitution = async (req: Request, res: Response) => {
@@ -19,7 +19,7 @@ export const updateInstitution = async (req: Request, res: Response) => {
           ...parsed.data,
           logo: imageFile,
         },
-        { new: true }
+        { new: true },
       );
       if (!updateInstitution) {
         return res.status(409).json({
