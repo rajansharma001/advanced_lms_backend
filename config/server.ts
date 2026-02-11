@@ -24,7 +24,7 @@ app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:3000",
     credentials: true,
-  })
+  }),
 );
 
 app.use(express.json());
@@ -49,7 +49,7 @@ app.use(
   "/api/user",
   verifyToken,
   verifyRole(["admin", "instructor"]),
-  userManagementRoute
+  userManagementRoute,
 );
 
 // ============classRoutes=============== //
@@ -60,14 +60,14 @@ app.use(
   "/api/enrollments",
   verifyToken,
   verifyRole(["admin"]),
-  classEnrollmentRoutes
+  classEnrollmentRoutes,
 );
 
 // ============uploadRoutes=============== //
 app.use("/api/uploads", verifyToken, verifyRole(["admin"]), uploadRoutes);
 
 // =============CoursliveClassRouteseRoutes============== //
-app.use("/api/courses", verifyToken, verifyRole(["admin"]), courseRoutes);
+app.use("/api/courses", verifyToken, courseRoutes);
 
 // =================LIVE CLASS ROUTES ========= //
 app.use("/api/live", verifyToken, liveClassRoutes);
