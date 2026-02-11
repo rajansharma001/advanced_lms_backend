@@ -45,12 +45,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/institutions", institutionRoutes);
 
 // ============userRoutes=============== //
-app.use(
-  "/api/user",
-  verifyToken,
-  verifyRole(["admin", "instructor"]),
-  userManagementRoute,
-);
+app.use("/api/user", verifyToken, userManagementRoute);
 
 // ============classRoutes=============== //
 app.use("/api/classes", verifyToken, verifyRole(["admin"]), classRoutes);
