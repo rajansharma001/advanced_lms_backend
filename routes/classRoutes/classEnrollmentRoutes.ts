@@ -7,25 +7,29 @@ import {
   getAllClassEnrollments,
   getClassEnrollmentById,
 } from "../../controllers/InstitutionsControllers/manageClassEnrollment/getClassEnrollmentController";
+import { verifyRole } from "../../middleware/verifyRoles";
 
 export const classEnrollmentRoutes = Router();
 
 classEnrollmentRoutes.post(
   "/new-enrollment",
+  verifyRole(["admin"]),
   activityLogger("NEW_ENROLL"),
-  addClassEnrollment
+  addClassEnrollment,
 );
 
 classEnrollmentRoutes.patch(
   "/update-enrollment/:id",
+  verifyRole(["admin"]),
   activityLogger("UPDATE_ENROLL"),
-  updateClassEnrollment
+  updateClassEnrollment,
 );
 
 classEnrollmentRoutes.delete(
   "/delete-enrollment/:id",
+  verifyRole(["admin"]),
   activityLogger("DELETE_ENROLL"),
-  deleteClassEnrollment
+  deleteClassEnrollment,
 );
 
 classEnrollmentRoutes.get("/get-enrollment", getAllClassEnrollments);

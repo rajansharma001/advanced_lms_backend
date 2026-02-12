@@ -19,6 +19,7 @@ userManagementRoute.post(
   activityLogger("New User"),
   newUser,
 );
+
 userManagementRoute.patch(
   "/update-user/:id",
   verifyRole(["admin", "instructor"]),
@@ -26,11 +27,13 @@ userManagementRoute.patch(
   activityLogger("User Updated"),
   updateUser,
 );
+
 userManagementRoute.delete(
   "/delete-user/:id",
   verifyRole(["admin", "instructor"]),
   activityLogger("New Deleted"),
   deleteUser,
 );
+
 userManagementRoute.get("/get-users", getAllUsers);
 userManagementRoute.get("/get-user/:id", getUserById);

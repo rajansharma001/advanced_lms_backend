@@ -51,12 +51,7 @@ app.use("/api/user", verifyToken, userManagementRoute);
 app.use("/api/classes", verifyToken, verifyRole(["admin"]), classRoutes);
 
 // ============enrollmentRoutes=============== //
-app.use(
-  "/api/enrollments",
-  verifyToken,
-  verifyRole(["admin"]),
-  classEnrollmentRoutes,
-);
+app.use("/api/enrollments", verifyToken, classEnrollmentRoutes);
 
 // ============uploadRoutes=============== //
 app.use("/api/uploads", verifyToken, verifyRole(["admin"]), uploadRoutes);
